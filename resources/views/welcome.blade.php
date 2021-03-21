@@ -24,8 +24,10 @@
         <h1>Expense Tracker</h1>
         <p>by Leo</p>
         <br><br>
+        {{ $expense }}
         <h2>Expense</h2>
         <div class="ml-4">
+        
             <h5>category 1</h5>
                 <div class="ml-4">
                     <p>item 1 - Rp. 12.000</p>
