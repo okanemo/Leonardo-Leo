@@ -24,50 +24,32 @@
         <h1>Expense Tracker</h1>
         <p>by Leo</p>
         <br><br>
-        {{ $expense }}
         <h2>Expense</h2>
         <div class="ml-4">
-        
-            <h5>category 1</h5>
+            @foreach($expense as $exp)
+            <h5>{{ $exp->name }}</h5>
                 <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
+                    @foreach($item as $it)
+                        @if($it->category_id == $exp->id)
+                            <p>{{$it->name}} - Rp. {{$it->amount}}</p>
+                        @endif
+                    @endforeach
                 </div>
-            <h5>category 2</h5>
-                <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                </div>
-            <h5>category 3</h5>
-                <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                </div>
+            @endforeach
         </div>
 
         <h2>Income</h2>
         <div class="ml-4">
-            <h5>category 1</h5>
+            @foreach($income as $inc)
+            <h5>{{ $inc->name }}</h5>
                 <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
+                    @foreach($item as $it)
+                        @if($it->category_id == $inc->id)
+                            <p>{{$it->name}} - Rp. {{$it->amount}}</p>
+                        @endif
+                    @endforeach
                 </div>
-            <h5>category 2</h5>
-                <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                </div>
-            <h5>category 3</h5>
-                <div class="ml-4">
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                    <p>item 1 - Rp. 12.000</p>
-                </div>
+            @endforeach
         </div>
     </body>
 </html>

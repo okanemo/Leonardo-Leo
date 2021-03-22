@@ -25,12 +25,7 @@ Route::get('/', function () {
     // ->get();
     $expense = Category:: where('type', 'expense')->get();
     $income = Category:: where('type', 'income')->get();
-    $expense_data = array();
-
-    foreach($expense as $exp) {
-        $temp = SubCategory::where('categoty_id', $exp->id);
-        $expense_data[] = $temp;
-    }
+    $item = SubCategory::all();
     
-    return view('welcome', ['expense' => $expense, 'income' => $income, 'expense_data' => $expense_data]);
+    return view('welcome', ['expense' => $expense, 'income' => $income, 'item' => $item]);
 });
