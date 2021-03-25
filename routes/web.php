@@ -36,3 +36,36 @@ Route::get('/', function () {
     
     return view('welcome', ['expense' => $expense, 'income' => $income, 'item' => $item]);
 });
+
+Route::post('/category', function () {
+    $name = request('name');
+    $type = request('type');
+
+    $category = new Category();
+    $category->name = $name;
+    $category->type = $type;
+
+    $category->save();
+
+    return redirect('/add');
+});
+
+Route::get('/add', function() {
+    $category = Category::all();
+
+    return view('add', ['category' => $category]);
+});
+
+Route::post('/add', function() {
+    $name = request('name');
+    $amount = request('amount');
+    $category = request('category');
+
+    $newItem = new SubCategory();
+    $newItem->name = $name;
+    $newItem->amount = $amount;
+    $newItem->category_id = $category;
+    $newItem->save();
+
+    return redirect('/');
+});

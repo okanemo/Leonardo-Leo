@@ -21,46 +21,42 @@
         </style>
     </head>
     <body class="antialiased px-6 bg-gray-800">
-        <h1>Expense Tracker</h1>
-        <p>by Leo</p>
-        <br><br>
-        <form method="GET">
-            <p>filter date from:</p>
-            <input type="date" name="start" required/>
-            <p>to:</p>
-            <input type="date" name="end" required/>
-            <button type="submit">Search</button><br>
-            <a href="/" class="bg-gray-100">Reset Filter</a>
+    <h1>Add new Category</h1>
+        <form method="POST" action="/category">
+            @csrf
+            <div>
+                <p>type</p>
+                <select required name="type">
+                    <option value='expense'>Expense</option>
+                    <option value='income'>Income</option>
+                </select>
+            </div>
+            <div>
+                <p>name</p>
+                <input type="text" required name="name"/>
+            </div>
+            <button type="submit">Submit</button>
         </form>
-        <br><br>
-        <a href="/add" class="bg-gray-100">Add Record</a>
-        <br><br>
-        <h2>Expense</h2>
-        <div class="ml-4">
-            @foreach($expense as $exp)
-            <h5>{{ $exp->name }}</h5>
-                <div class="ml-4">
-                    @foreach($item as $it)
-                        @if($it->category_id == $exp->id)
-                            <p>{{$it->name}} - Rp. {{$it->amount}}</p>
-                        @endif
+        <hr/>
+        <h1>Add new Record</h1>
+        <form method="POST">
+            @csrf
+            <div>
+                <p>category</p>
+                <select required name="category">
+                    @foreach($category as $cat)
+                        <option value='{{$cat->id}}'>{{$cat->name}} - {{$cat->type}}</option>
                     @endforeach
-                </div>
-            @endforeach
-        </div>
-
-        <h2>Income</h2>
-        <div class="ml-4">
-            @foreach($income as $inc)
-            <h5>{{ $inc->name }}</h5>
-                <div class="ml-4">
-                    @foreach($item as $it)
-                        @if($it->category_id == $inc->id)
-                            <p>{{$it->name}} - Rp. {{$it->amount}}</p>
-                        @endif
-                    @endforeach
-                </div>
-            @endforeach
-        </div>
-    </body>
+                </select>
+            </div>
+            <div>
+                <p>name</p>
+                <input type="text" required name="name"/>
+            </div>
+            <div>
+                <p>amount</p>
+                <input type="number" required name="amount"/>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
 </html>
