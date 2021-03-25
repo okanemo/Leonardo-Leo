@@ -24,6 +24,14 @@
         <h1>Expense Tracker</h1>
         <p>by Leo</p>
         <br><br>
+        <form method="GET">
+            <p>filter date from:</p>
+            <input type="date" name="start"/>
+            <p>to:</p>
+            <input type="date" name="end"/>
+            <button type="submit">Search</button>
+        </form>
+        <br><br>
         <h2>Expense</h2>
         <div class="ml-4">
             @foreach($expense as $exp)

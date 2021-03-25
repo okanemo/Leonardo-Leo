@@ -16,16 +16,23 @@ use App\Models\SubCategory;
 */
 
 Route::get('/', function () {
-    // $expense = Category::join('sub_category', 'category.id', '=', 'sub_category.category_id')
-    // ->where('type', 'expense')
-    // ->get();
- 
-    // $income = Category::join('sub_category', 'category.id', '=', 'sub_category.category_id')
-    // ->where('type', 'income')
-    // ->get();
+    $startDate = request('start');
+    $endDate = request('end');
+  
+
     $expense = Category:: where('type', 'expense')->get();
     $income = Category:: where('type', 'income')->get();
-    $item = SubCategory::all();
+    $query = SubCategory::whereNotNull('name');
+
+    if (!is_null($endDate) && !is_null($startDate)) {
+        $startDate = date($startDate);
+        $endDate = date($endDate);
+
+        $query
+        ->whereBetween('created_at', [$startDate, $endDate]);
+    } 
+
+    $item = $query->get();
     
     return view('welcome', ['expense' => $expense, 'income' => $income, 'item' => $item]);
 });
